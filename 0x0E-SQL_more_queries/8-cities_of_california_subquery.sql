@@ -1,13 +1,7 @@
--- creates the database hbtn_0d_usa and the table cities (in the database hbtn_0d_usa) on your MySQL server.
--- cities description:
--- 	  id INT unique, auto generated, can’t be null and is a primary key
---	  state_id INT, can’t be null and must be a FOREIGN KEY that references to id of the states table
--- 	  name VARCHAR(256) can’t be null
--- If the database hbtn_0d_usa already exists, your script should not fail
--- If the table cities already exists, your script should not fail
+-- lists all the cities of California that can be found in the database hbtn_0d_usa.
+-- The states table contains only one record where name = California
+-- Results must be sorted in ascending order by cities.id
+-- You are not allowed to use the JOIN keyword
+-- The database name will be passed as an argument of the mysql command
 
-CREATE DATABASE IF NOT EXISTS hbtn_0d_usa;
-CREATE TABLE IF NOT EXISTS hbtn_0d_usa.cities (id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-state_id INT NOT NULL,
-name VARCHAR(256) NOT NULL,
-FOREIGN KEY(state_id) REFERENCES hbtn_0d_usa.states(id));
+SELECT id, name FROM cities WHERE state_id = (SELECT id FROM states WHERE name = "California") ORDER BY id;
